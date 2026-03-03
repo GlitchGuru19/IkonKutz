@@ -1,0 +1,240 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "email": "admin@ikon.com",
+      "password": "password",
+      "displayName": "Ikon Admin",
+      "role": "admin",
+      "createdAt": 1704067200000
+    },
+    {
+      "id": "customer-1",
+      "email": "test@example.com",
+      "password": "password",
+      "displayName": "Test Customer",
+      "role": "customer",
+      "createdAt": 1704067200000
+    },
+    {
+      "id": "f7a77c1b-a581-4480-96ec-609503e51b43",
+      "email": "pkabwe556@gmail.com",
+      "password": "iLOVEC#21",
+      "displayName": "PETER KABWE",
+      "phone": "+260962715728",
+      "role": "customer",
+      "createdAt": 1768061921585
+    },
+    {
+      "id": "65b5935d-c678-421e-8d1a-80c1cbdf6c02",
+      "email": "peterkatebe12@gmail.com",
+      "password": "iLOVEC#21",
+      "displayName": "PETER",
+      "phone": "+260773681580",
+      "role": "customer",
+      "createdAt": 1768062094693
+    },
+    {
+      "id": "fa19da4f-7ab2-4c31-8218-7628341a8152",
+      "email": "opium@interscope.com",
+      "password": "iLOVEGo@",
+      "displayName": "Ken Carsoon",
+      "phone": "+26077105090",
+      "role": "customer",
+      "createdAt": 1768144145529
+    }
+  ],
+  "services": [
+    {
+      "id": "s1",
+      "name": "Signature Cut",
+      "price": 150,
+      "durationMinutes": 50,
+      "description": "Precision haircut tailored to your style"
+    },
+    {
+      "id": "s2",
+      "name": "Cut & Beard",
+      "price": 200,
+      "durationMinutes": 50,
+      "description": "Complete grooming package with beard trim"
+    },
+    {
+      "id": "s3",
+      "name": "Line Up",
+      "price": 80,
+      "durationMinutes": 30,
+      "description": "Crisp edges and clean lines"
+    }
+  ],
+  "slots": [
+    {
+      "id": "3422c8c5-82af-41e9-93ae-56504a5f5a58",
+      "date": "2026-01-10",
+      "time": "08:00",
+      "isBooked": true,
+      "isLocked": false,
+      "bookedBy": "65b5935d-c678-421e-8d1a-80c1cbdf6c02"
+    },
+    {
+      "id": "e61ac6ed-2adc-45d8-ac00-65878b509e4e",
+      "date": "2026-01-10",
+      "time": "12:50",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "b8b3971b-9ef5-4bb8-9777-ed283e2e5881",
+      "date": "2026-01-10",
+      "time": "13:40",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "f543a5ba-36c2-4f90-b2b2-ab2738abb48c",
+      "date": "2026-01-10",
+      "time": "14:30",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "c6fcf4b8-c075-4e80-8c1f-5a621a99b93f",
+      "date": "2026-01-10",
+      "time": "15:20",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "4d027a97-c4b6-4c42-ab0f-e1caf5a57da3",
+      "date": "2026-01-10",
+      "time": "16:10",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "86cae5d3-87b3-438d-8559-35ccdfc715ce",
+      "date": "2026-01-10",
+      "time": "09:40",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "8cbf65e6-9e0c-42ff-8806-dba21397c891",
+      "date": "2026-01-10",
+      "time": "08:50",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "24413264-d113-431f-9754-f25c0b0845b5",
+      "date": "2026-01-10",
+      "time": "10:30",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "4fe7a7f0-b5d5-4491-836d-8a795b9c796c",
+      "date": "2026-01-10",
+      "time": "11:20",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "aedb5fa7-8f87-4bdc-8b9a-1b5890f0a499",
+      "date": "2026-01-11",
+      "time": "08:00",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "4e550aad-4787-42aa-83b9-280de167e670",
+      "date": "2026-01-11",
+      "time": "08:50",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "64c531c3-5459-433e-9b96-cdeef483787b",
+      "date": "2026-01-11",
+      "time": "10:30",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "da3f8433-57d2-45ff-a068-41cff64f043a",
+      "date": "2026-01-11",
+      "time": "11:20",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "60641711-a686-4dd8-b55f-7427b9a4bce0",
+      "date": "2026-01-11",
+      "time": "09:40",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "a887ee1e-f497-43e5-9a4e-c93abd5222a7",
+      "date": "2026-01-11",
+      "time": "12:50",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "08e60d97-7a18-4370-9e35-e784085e908f",
+      "date": "2026-01-11",
+      "time": "13:40",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "1e0547df-cfe4-498d-9c5c-4c282e31ca47",
+      "date": "2026-01-11",
+      "time": "14:30",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "402a05cd-67a3-45fb-9abc-d9cb3f42fcc0",
+      "date": "2026-01-11",
+      "time": "15:20",
+      "isBooked": false,
+      "isLocked": false
+    },
+    {
+      "id": "8566532e-31d9-4545-a96d-09b2691b4ec7",
+      "date": "2026-01-11",
+      "time": "16:10",
+      "isBooked": true,
+      "isLocked": false,
+      "bookedBy": "fa19da4f-7ab2-4c31-8218-7628341a8152"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "da0cd3a2-b558-4943-afd6-aa86f6bd9711",
+      "customerId": "65b5935d-c678-421e-8d1a-80c1cbdf6c02",
+      "customerName": "PETER",
+      "serviceId": "s1",
+      "serviceName": "Signature Cut",
+      "date": "2026-01-10",
+      "time": "08:00",
+      "price": 150,
+      "status": "booked",
+      "createdAt": 1768062110589
+    },
+    {
+      "id": "04009962-84d0-4344-99a3-ecff7241585e",
+      "customerId": "fa19da4f-7ab2-4c31-8218-7628341a8152",
+      "customerName": "Ken Carsoon",
+      "serviceId": "s1",
+      "serviceName": "Signature Cut",
+      "date": "2026-01-11",
+      "time": "16:10",
+      "price": 150,
+      "status": "booked",
+      "createdAt": 1768144200627
+    }
+  ]
+}
