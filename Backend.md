@@ -1,51 +1,136 @@
-# Backend Documentation
+# Backend Documentation - Firebase
 
-This project uses a local JSON server to mock a backend REST API. The data is persisted in the `db.json` file located in the project root.
+Ikon Cuts uses **Firebase** as the Backend-as-a-Service platform. This provides:
+- Cloud authentication (Email/Password)
+- NoSQL database (Firestore)
+- Real-time data synchronization
+- Automatic backups and scalability
 
-**Base URL:** `http://localhost:3000`
+## Firebase Services Used
 
-## Data Source
-All data is stored in the `db.json` file. This file acts as the database.
-- Modifying this file directly will update the data.
-- The server automatically updates this file when operations (POST, PATCH, DELETE) are performed via the API.
+### 1. Firebase Authentication
 
-## Endpoints
+Handles user login and registration.
 
-### 1. Users
-Manages customer and admin accounts.
+- **Method**: Email/Password authentication
+- **Implementation**: `src/firebase.ts` exports auth functions
+- **Security**: Passwords hashed and managed by Firebase
+- **Session**: Auth state persisted locally in browser
 
-| Method | Endpoint | Description | Parameters / Body |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/users` | List all users or filter by criteria. | `?email=...&password=...` (Used for specific user lookup/login) |
-| `POST` | `/users` | Create a new user account (Signup). | `{ id, email, password, displayName, phone, role, createdAt }` |
+### 2. Firestore Database
 
-### 2. Services
-Manages the list of barber services available for booking.
+NoSQL cloud database for storing all application data.
 
-| Method | Endpoint | Description | Parameters / Body |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/services` | Get a list of all available services. | - |
-| `POST` | `/services` | Add a new service (Admin only). | `{ id, name, price, description, durationMinutes }` |
-| `DELETE` | `/services/:id` | Remove a service (Admin only). | - |
+#### Collections Overview
 
-### 3. Time Slots (`/slots`)
-Manages the daily schedule and availability logic.
+| Collection | Purpose | Access Control |
+|---|---|---|
+| `users` | User profiles and roles | Read/write own data, admins see all |
+| `services` | Barber services catalog | All read, admin write |
+| `slots` | Available time slots | All read, admin write |
+| `appointments` | Customer bookings | Users see own, admins see all |
 
-| Method | Endpoint | Description | Parameters / Body |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/slots` | Get time slots. Typically filtered by date. | `?date=YYYY-MM-DD` |
-| `POST` | `/slots` | Create a new time slot (used by Admin "Generate Schedule"). | `{ id, date, time, isBooked, isLocked }` |
-| `PATCH` | `/slots/:id` | Update a slot's status (Book or Lock/Unlock). | `{ isBooked: boolean, bookedBy: userId }` OR `{ isLocked: boolean }` |
+## Database Operations
 
-### 4. Appointments
-Manages confirmed bookings.
+All database operations are abstracted in `src/api.ts`:
 
-| Method | Endpoint | Description | Parameters / Body |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/appointments` | Get a list of appointments. | `?customerId=...` (Filter for specific user) |
-| `POST` | `/appointments` | Create a new confirmed booking. | `{ id, customerId, customerName, serviceId, serviceName, date, time, price, status, createdAt }` |
+### User Operations
 
-## Authentication Note
-Since this is a simple local backend, "Authentication" is handled by the frontend `AuthContext` querying the `/users` endpoint.
-- **Login**: `GET /users?email=...&password=...`
-- **Signup**: `POST /users`
+```typescript
+// Sign up new user
+signupUser(email: string, password: string, displayName: string): Promise<User>
+
+// Login existing user
+loginUser(email: string, password: string): Promise<User>
+
+// Get current authenticated user
+getCurrentUser(): Promise<User | null>
+
+// Logout
+logoutUser(): Promise<void>
+```
+
+### Service Operations
+
+```typescript
+// Fetch all services
+getServices(): Promise<Service[]>
+
+// Add new service (admin only)
+addService(service: Service): Promise<string>  // returns service ID
+
+// Delete service (admin only)
+deleteService(id: string): Promise<void>
+```
+
+### Slot Operations
+
+```typescript
+// Get slots for a specific date
+getSlotsByDate(date: string): Promise<Slot[]>
+
+// Create new slot
+addSlot(slot: Slot): Promise<string>  // returns slot ID
+
+// Update slot (book or lock)
+updateSlot(id: string, updates: Partial<Slot>): Promise<void>
+```
+
+### Appointment Operations
+
+```typescript
+// Create new appointment
+addAppointment(appointment: Appointment): Promise<string>
+
+// Get user's appointments
+getUserAppointments(userId: string): Promise<Appointment[]>
+
+// Get all appointments (admin)
+getAllAppointments(): Promise<Appointment[]>
+```
+
+## Firestore Security Rules
+
+Default rules on new Firebase projects allow read/write for authenticated users. For production, update rules in Firebase Console to:
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read/write their own document
+    match /users/{uid} {
+      allow read, write: if request.auth.uid == uid;
+    }
+    
+    // Services readable by all, writable by admins only
+    match /services/{document=**} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin(request.auth.uid);
+    }
+    
+    // Similar rules for slots and appointments
+  }
+  
+  function isAdmin(uid) {
+    return get(/databases/$(database)/documents/users/$(uid)).data.role == 'admin';
+  }
+}
+```
+
+## Real-Time Updates
+
+Firestore provides real-time listeners that automatically update the UI when data changes:
+
+```typescript
+const unsubscribe = onSnapshot(query(collection(db, 'slots')), (snapshot) => {
+  // UI updates automatically when slots change
+});
+```
+
+## Setup & Configuration
+
+See [authentication.md](authentication.md) for:
+- Creating a Firebase project
+- Getting API credentials
+- Configuring Firebase in the app
+- Creating admin accounts
